@@ -21,6 +21,10 @@ class BasePage:
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
+    def go_to_basket(self):
+        basket_btn = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+        basket_btn.click()
+
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
@@ -55,6 +59,18 @@ class BasePage:
     def is_disappeared(self, how, what, timeout=4):
         try:
            WebDriverWait(self.browser, timeout, 1, TimeoutException). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+        return True
+
+    def basket_empty_message(self):
+        count_messages = self.browser.find_elements(*BasePageLocators.BASKET_CONTENT)
+        return len(count_messages) == 1
+
+    def summary_empty(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException). \
                 until_not(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
