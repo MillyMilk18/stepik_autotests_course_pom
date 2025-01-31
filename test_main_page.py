@@ -6,7 +6,7 @@ import pytest
 link = "http://selenium1py.pythonanywhere.com"
 
 @pytest.mark.login_guest
-class TestLoginFromMainPage():
+class TestLoginFromMainPage:
     def test_guest_can_go_to_login_page(self, browser):
         page = MainPage(browser, link)
         page.open()
@@ -14,6 +14,7 @@ class TestLoginFromMainPage():
         login_page = LoginPage(browser, browser.current_url)
         login_page.should_be_login_page()
 
+#может ли гость открыть корзину и увидеть там товар  (не должен)
 def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     page = MainPage(browser, link)
     page.open()
