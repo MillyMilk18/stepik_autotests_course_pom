@@ -1,4 +1,6 @@
 import math
+
+import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
@@ -14,9 +16,12 @@ class BasePage:
         self.url = url
         self.browser.implicitly_wait(timeout)
 
+
     def open(self):
         self.browser.get(self.url)
 
+
+    #переходы по страницам
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
@@ -25,8 +30,15 @@ class BasePage:
         basket_btn = self.browser.find_element(*BasePageLocators.BASKET_LINK)
         basket_btn.click()
 
+
+
+    #все тестовые методы
     def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+        assert BasePage.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def should_be_authorized_user(self):
+        assert BasePage.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                         " probably unauthorised user"
 
     def is_element_present(self, how, what):
         try:
@@ -35,6 +47,7 @@ class BasePage:
             return False
         return True
 
+    #проходка через алёрт
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
@@ -75,3 +88,4 @@ class BasePage:
         except TimeoutException:
             return False
         return True
+

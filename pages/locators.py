@@ -6,6 +6,9 @@ class MainPageLocators:
 class LoginPageLocators:
     LOGIN_FORM = (By.CSS_SELECTOR, '#login_form')
     REGISTRATION_FORM = (By.CSS_SELECTOR, '#register_form')
+    REGISTRATION_EMAIL = (By.CSS_SELECTOR, "#id_registration-email")
+    REGISTRATION_PASSWORD = (By.CSS_SELECTOR, ".register_form [type='password']" )
+    REGISTRATION_BTN = (By.CSS_SELECTOR, ".register_form .btn")
 
 class ProductPageLocators:
     BTN_ADD_TO_BASKET = (By.CSS_SELECTOR, '.btn-add-to-basket')
@@ -20,3 +23,4 @@ class BasePageLocators:
     BASKET_LINK = (By.CSS_SELECTOR, ".btn-group > a")
     BASKET_PRODUCTS = (By.CSS_SELECTOR, ".basket_summary")
     BASKET_CONTENT = (By.CSS_SELECTOR, "#content_inner p")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
